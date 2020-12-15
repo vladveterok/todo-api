@@ -1,8 +1,8 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
+require 'database_cleaner'
 require 'ffaker'
-require 'aasm/rspec'
 
 SimpleCov.start 'rails' do
   minimum_coverage 90
@@ -10,7 +10,7 @@ SimpleCov.start 'rails' do
 end
 
 require File.expand_path('../config/environment', __dir__)
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
@@ -22,13 +22,10 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
-RSpec.configure do |config|
-  config.include Shoulda::Matchers::ActiveModel, type: :model
-  config.include Shoulda::Matchers::ActiveRecord, type: :model
-  config.include Shoulda::Matchers::ActiveModel, type: :model
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
+RSpec.configure do |config|
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 end
