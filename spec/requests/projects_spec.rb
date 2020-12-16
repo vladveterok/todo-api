@@ -1,4 +1,4 @@
-RSpec.describe 'Todos API', type: :request do
+RSpec.describe 'Projects API', type: :request do
   let!(:projects) { create_list(:project, 10) }
   let(:project_id) { projects.first.id }
 
@@ -31,26 +31,22 @@ RSpec.describe 'Todos API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:project_id) { 100 }
+      let(:project_id) { projects.last.id + 1 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(:not_found)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find project/)
       end
     end
   end
 
   describe 'POST /projects' do
-    let(:valid_attributes) { { title: 'Learn Elm', created_by: '1' } }
+    let(:valid_attributes) { { name: 'Learn Elm', created_by: '1' } }
 
     context 'when the request is valid' do
       before { post '/projects', params: valid_attributes }
 
       it 'creates a project' do
-        expect(json['title']).to eq('Learn Elm')
+        expect(json['name']).to eq('Learn Elm')
       end
 
       it 'returns status code 201' do
@@ -59,7 +55,7 @@ RSpec.describe 'Todos API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/projects', params: { title: 'Foobar' } }
+      before { post '/projects', params: { name: 'Foobar' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(:unprocessable_entity)
@@ -73,7 +69,7 @@ RSpec.describe 'Todos API', type: :request do
   end
 
   describe 'PUT /projects/:id' do
-    let(:valid_attributes) { { title: 'Shopping' } }
+    let(:valid_attributes) { { name: 'Shopping' } }
 
     context 'when the record exists' do
       before { put "/projects/#{project_id}", params: valid_attributes }
@@ -92,7 +88,7 @@ RSpec.describe 'Todos API', type: :request do
     before { delete "/projects/#{project_id}" }
 
     it 'returns status code 204' do
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
