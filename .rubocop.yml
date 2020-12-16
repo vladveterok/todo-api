@@ -26,3 +26,6 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 2
