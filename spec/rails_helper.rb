@@ -6,7 +6,7 @@ require 'ffaker'
 
 SimpleCov.start 'rails' do
   minimum_coverage 90
-  add_filter ['app/jobs', 'app/mailers', 'app/channels', 'app/admin/admin_user', 'app/admin/dashboard']
+  add_filter ['app/jobs', 'app/mailers', 'app/channels']
 end
 
 require File.expand_path('../config/environment', __dir__)
