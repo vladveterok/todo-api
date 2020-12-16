@@ -9,7 +9,7 @@ gem 'jwt_sessions', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem 'rails', '~> 6.1.0'
 gem 'rails-i18n', '~> 6.0.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
