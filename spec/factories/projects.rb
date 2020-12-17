@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :project do
     name { FFaker::Book.title }
-    created_by { FFaker::Random.rand(10**10) }
+
+    trait :with_user do
+      user { create(:user) }
+    end
   end
 end

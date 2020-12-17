@@ -1,5 +1,6 @@
 RSpec.describe 'Projects API', type: :request do
-  let!(:projects) { create_list(:project, 10) }
+  let(:user) { create(:user) }
+  let!(:projects) { create_list(:project, 10, :with_user) }
   let(:project_id) { projects.first.id }
 
   describe 'GET /projects' do
@@ -40,7 +41,7 @@ RSpec.describe 'Projects API', type: :request do
   end
 
   describe 'POST /projects' do
-    let(:valid_attributes) { { name: 'Learn Elm', created_by: '1' } }
+    let(:valid_attributes) { { name: 'Learn Elm', user_id: user.id } }
 
     context 'when the request is valid' do
       before { post '/projects', params: valid_attributes }
@@ -55,7 +56,7 @@ RSpec.describe 'Projects API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/projects', params: { name: 'Foobar' } }
+      before { post '/projects', params: { name: 'Foobar', user_id: nil } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(:unprocessable_entity)
@@ -63,7 +64,7 @@ RSpec.describe 'Projects API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Created by can't be blank/)
+          .to match(/Validation failed: User must exist/)
       end
     end
   end

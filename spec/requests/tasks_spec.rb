@@ -1,5 +1,5 @@
 RSpec.describe 'Tasks API', type: :request do
-  let!(:project) { create(:project) }
+  let!(:project) { create(:project, :with_user) }
   let!(:tasks) { create_list(:task, 20, project_id: project.id) }
   let(:project_id) { project.id }
   let(:id) { tasks.first.id }

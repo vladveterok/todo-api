@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.permit(:name, :created_by)
+    params.permit(:name, :user_id)
   end
 
   def set_project

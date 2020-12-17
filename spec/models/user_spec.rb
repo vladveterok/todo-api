@@ -1,4 +1,8 @@
 RSpec.describe User, type: :model do
+  context 'with associations' do
+    it { is_expected.to have_many(:projects).dependent(:destroy) }
+  end
+
   context 'with table columns' do
     it { is_expected.to have_db_column(:email).of_type(:string) }
     it { is_expected.to have_db_column(:password_digest).of_type(:string) }

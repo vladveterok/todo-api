@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'bcrypt', '~> 3.1.13'
 gem 'ffaker', '~> 2', require: false
 gem 'jsonapi-serializer', '~> 2.1'
 gem 'jwt_sessions', '~> 2.5'
