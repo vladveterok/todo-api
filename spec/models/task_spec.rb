@@ -11,6 +11,6 @@ RSpec.describe Task, type: :model do
   end
 
   context 'with validations' do
-    it { is_expected.to validate_presence_of(:done) }
+    it { is_expected.to validate_inclusion_of(:done).in_array([true, false]) }
   end
 end
