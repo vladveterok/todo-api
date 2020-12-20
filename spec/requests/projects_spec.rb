@@ -5,7 +5,7 @@ RSpec.describe 'Projects API', type: :request do
   let(:headers) { valid_headers }
 
   describe 'GET /projects' do
-    before { get '/projects', params: {}, headers: headers }
+    before { get '/api/projects', params: {}, headers: headers }
 
     it 'returns projects' do
       expect(json).not_to be_empty
@@ -18,7 +18,7 @@ RSpec.describe 'Projects API', type: :request do
   end
 
   describe 'GET /projects/:id' do
-    before { get "/projects/#{project_id}", params: {}, headers: headers }
+    before { get "/api/projects/#{project_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the project' do
@@ -44,7 +44,7 @@ RSpec.describe 'Projects API', type: :request do
     let(:valid_attributes) { { name: 'Learn Elm', user_id: user.id } }
 
     context 'when the request is valid' do
-      before { post '/projects', params: valid_attributes, headers: headers }
+      before { post '/api/projects', params: valid_attributes, headers: headers }
 
       it 'creates a project' do
         expect(json['name']).to eq('Learn Elm')
@@ -56,7 +56,7 @@ RSpec.describe 'Projects API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/projects', params: { name: 'Foobar', user_id: nil } }
+      before { post '/api/projects', params: { name: 'Foobar', user_id: nil } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(:unauthorized)
@@ -73,7 +73,7 @@ RSpec.describe 'Projects API', type: :request do
     let(:valid_attributes) { { name: 'Shopping' } }
 
     context 'when the record exists' do
-      before { put "/projects/#{project_id}", params: valid_attributes, headers: headers }
+      before { put "/api/projects/#{project_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -86,7 +86,7 @@ RSpec.describe 'Projects API', type: :request do
   end
 
   describe 'DELETE /projects/:id' do
-    before { delete "/projects/#{project_id}", params: {}, headers: headers }
+    before { delete "/api/projects/#{project_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(:ok)
