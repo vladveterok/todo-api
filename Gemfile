@@ -12,6 +12,7 @@ gem 'puma', '~> 4.1'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 6.1.0'
 gem 'rails-i18n', '~> 6.0.0'
+gem 'redis', '~> 4.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

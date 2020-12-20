@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
+  before_action :authorize_access_request!
   before_action :set_project, only: %i[show update destroy]
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects
     render json: @projects, status: :ok
   end
 
@@ -11,7 +12,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create!(project_params)
+    @project = current_user.projects.build(project_params)
+    return render json: { error: @project.errors }, status: :unprocessable_entity unless @project.save
+
     render json: @project, status: :created
   end
 
@@ -36,6 +39,6 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
   end
 end
