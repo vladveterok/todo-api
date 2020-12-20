@@ -5,7 +5,7 @@ class SigninController < ApplicationController
     user = User.find_by!(email: params[:email])
     return not_authorized unless user.authenticate(params[:password])
 
-    tokens = SetupSessionService.new(user: user, response: response).call
+    tokens = SetupTokensService.new(user: user, response: response).call
     render json: { csrf: tokens[:csrf] }
   end
 
