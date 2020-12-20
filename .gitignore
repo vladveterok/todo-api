@@ -26,5 +26,6 @@
 
 .DS_Store
 
+dump.rdb
 # Ignore master key for decrypting credentials and more.
 /config/master.key
