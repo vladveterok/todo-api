@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :projects do
-    resources :tasks
+  namespace :api, defaults: { format: :json } do
+    namespace :v1, constraints: Constraints::ApiVersionConstraint.new(version: 'v1', default: true) do
+      resources :projects do
+        resources :tasks
+      end
+    end
   end
 
   post 'signup', to: 'signup#create'
