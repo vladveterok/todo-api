@@ -30,7 +30,7 @@ module Api
       private
 
       def task_params
-        params.permit(:name, :done)
+        params.permit(:name, :position, :deadline, :done)
       end
 
       def set_project

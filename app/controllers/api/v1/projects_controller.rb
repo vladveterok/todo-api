@@ -2,16 +2,16 @@ module Api
   module V1
     class ProjectsController < Api::V1::ApiController
       before_action :authorize_access_request!
-      before_action :set_project, only: %i[show update destroy]
+      before_action :set_project, only: %i[update destroy]
 
       def index
-        @projects = current_user.projects
+        @projects = ProjectSerializer.new(current_user.projects).serializable_hash.to_json
         render json: @projects, status: :ok
       end
 
-      def show
-        render json: @project, status: :ok
-      end
+      # def show
+      #  render json: @project, status: :ok
+      # end
 
       def create
         @project = current_user.projects.build(project_params)
@@ -41,7 +41,7 @@ module Api
       end
 
       def set_project
-        @project = current_user.projects.find(params[:id])
+        @project = ProjectSerializer.new(current_user.projects.find(params[:id])).serializable_hash.to_json
       end
     end
   end
