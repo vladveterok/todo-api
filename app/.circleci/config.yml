@@ -46,7 +46,6 @@ jobs:
       - run: 
           name: rubocop
           command: bundle exec rubocop
-      
 
 workflows:
   version: 2
