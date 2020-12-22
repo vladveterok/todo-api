@@ -108,4 +108,23 @@ RSpec.describe 'Tasks API', type: :request do
       expect(response).to have_http_status(:no_content)
     end
   end
+
+  describe 'POST /projects/:id/tasks/:id/toggle_status' do
+    before do
+      post "/api/projects/#{project_id}/tasks/#{id}/toggle_status", params: {}, headers: headers
+    end
+
+    it do
+      expect(response).to have_http_status(:ok)
+      expect(Task.first.done).to be true
+    end
+  end
+
+  describe 'PATCH /projects/:id/tasks/sort' do
+    before { patch "/api/projects/#{project_id}/tasks/sort", params: {}, headers: headers }
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
