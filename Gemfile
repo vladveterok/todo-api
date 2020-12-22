@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'acts_as_list', '~> 1.0.2'
 gem 'bcrypt', '~> 3.1.13'
 gem 'ffaker', '~> 2', require: false
 gem 'jsonapi-serializer', '~> 2.1'
@@ -18,7 +19,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'bullet'
-  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug', '~> 3.9'
 end
 

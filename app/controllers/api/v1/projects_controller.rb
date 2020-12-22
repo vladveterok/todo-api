@@ -9,9 +9,7 @@ module Api
         render json: @projects, status: :ok
       end
 
-      # def show
-      #  render json: @project, status: :ok
-      # end
+      def show; end
 
       def create
         @project = current_user.projects.build(project_params)
@@ -41,7 +39,7 @@ module Api
       end
 
       def set_project
-        @project = ProjectSerializer.new(current_user.projects.find(params[:id])).serializable_hash.to_json
+        @project = current_user.projects.find(params[:id])
       end
     end
   end

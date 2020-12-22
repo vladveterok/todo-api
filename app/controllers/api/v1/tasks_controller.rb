@@ -2,18 +2,20 @@ module Api
   module V1
     class TasksController < Api::V1::ApiController
       before_action :set_project
-      before_action :set_project_task, only: %i[show update destroy]
+      before_action :set_project_task, only: %i[show update destroy toggle_status]
 
       def index
         render json: @project.tasks, status: :ok
       end
 
       def show
-        render json: @task, status: :ok
+        # render json: @task, status: :ok
       end
 
       def create
-        @project.tasks.create!(task_params)
+        @task = @project.tasks.build(task_params)
+        return render json: { error: @task.errors }, status: :unprocessable_entity unless @task.save
+
         render json: @project, status: :created
       end
 
@@ -27,10 +29,24 @@ module Api
         head :no_content
       end
 
+      def sort
+        Project.find(params[:project_id]).tasks.each.with_index(1) do |task, index|
+          task.update position: index
+        end
+        head :ok
+      end
+
+      def toggle_status
+        return unless @task
+
+        @task.toggle(:done).save
+        head :ok
+      end
+
       private
 
       def task_params
-        params.permit(:name, :position, :deadline, :done)
+        params.permit(:name, :position, :deadline, :done, :project_id)
       end
 
       def set_project

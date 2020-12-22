@@ -30,27 +30,27 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   # Test suite for GET /projects/:project_id/tasks/:id
-  describe 'GET /projects/:project_id/tasks/:id' do
-    before { get "/api/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
+  # describe 'GET /projects/:project_id/tasks/:id' do
+  #  before { get "/api/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
 
-    context 'when project task exists' do
-      it 'returns status code 200' do
-        expect(response).to have_http_status(:ok)
-      end
+  #  context 'when project task exists' do
+  #    it 'returns status code 200' do
+  #      expect(response).to have_http_status(:ok)
+  #    end
 
-      it 'returns the task' do
-        expect(json['id']).to eq(id)
-      end
-    end
+  #    it 'returns the task' do
+  #      expect(json['id']).to eq(id)
+  #    end
+  #  end
 
-    context 'when project task does not exist' do
-      let(:id) { 0 }
+  #  context 'when project task does not exist' do
+  #    let(:id) { 0 }
 
-      it 'returns status code 404' do
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-  end
+  #    it 'returns status code 404' do
+  #      expect(response).to have_http_status(:not_found)
+  #    end
+  #  end
+  # end
 
   # Test suite for PUT /projects/:project_id/tasks
   describe 'POST /projects/:project_id/tasks' do
