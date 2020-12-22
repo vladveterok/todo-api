@@ -30,7 +30,7 @@ jobs:
           command: bundle exec rails db:schema:load --trace
       - run:
           name: Run redis
-          command: sudo redis-server --daemonize yes
+          command: sudo service redis-server start
       - run:
           name: Run Specs
           command: |
