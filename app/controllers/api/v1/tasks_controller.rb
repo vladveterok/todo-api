@@ -2,14 +2,13 @@ module Api
   module V1
     class TasksController < Api::V1::ApiController
       before_action :set_project
-      before_action :set_project_task, only: %i[show update destroy toggle_status]
+      before_action :set_project_task, only: %i[update destroy toggle_status]
 
+      # remove
       def index
         @tasks = @project.tasks
         render json: SerializeService.new(object: @tasks, serializer: :task).call, status: :ok
       end
-
-      def show; end
 
       def create
         @task = @project.tasks.build(task_params)

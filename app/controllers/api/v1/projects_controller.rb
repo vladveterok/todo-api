@@ -9,8 +9,6 @@ module Api
         render json: SerializeService.new(object: @projects, serializer: :project, included: :tasks).call, status: :ok
       end
 
-      def show; end
-
       def create
         @project = current_user.projects.build(project_params)
         return render json: { error: @project.errors }, status: :unprocessable_entity unless @project.save
