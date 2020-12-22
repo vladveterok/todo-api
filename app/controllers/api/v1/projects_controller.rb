@@ -25,7 +25,7 @@ module Api
         @project = Project.find(params[:id])
         return render json: { error: 'Unable to delete Project' }, status: :bad_request unless @project&.destroy
 
-        render json: { message: 'Project deleted successfully' }, status: :ok
+        render json: { message: I18n.t('projects.messages.destroy_success') }, status: :ok
       end
 
       private

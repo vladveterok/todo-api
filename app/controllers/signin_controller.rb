@@ -18,7 +18,7 @@ class SigninController < ApplicationController
   private
 
   def not_found
-    render json: { error: 'Cannot find email or passwrod provided, please, go away and never come back' },
+    render json: { error: I18n.t('errors.not_found') },
            status: :not_found
   end
 end

@@ -17,7 +17,7 @@ class SetupTokensService
   def set_refresh_tokens
     session = JWTSessions::Session.new(payload: @claimless_payload, refresh_by_access_allowed: true)
     @session = session.refresh_by_access_payload do
-      raise JWTSessions::Errors::Unauthorized, 'Grab your shotgun, babe, bad guys at the door'
+      raise JWTSessions::Errors::Unauthorized, I18n.t('errors.unauthorized')
     end
   end
 
