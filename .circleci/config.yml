@@ -29,9 +29,6 @@ jobs:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
       - run:
-          name: Run redis
-          command: sudo service redis-server start
-      - run:
           name: Run Specs
           command: |
             mkdir /tmp/test-results
