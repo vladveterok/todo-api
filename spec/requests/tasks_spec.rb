@@ -16,7 +16,7 @@ RSpec.describe 'Tasks API', type: :request do
       end
 
       it 'returns all project tasks' do
-        expect(json.size).to eq(20)
+        expect(json['data'].size).to eq(tasks.size)
       end
     end
 

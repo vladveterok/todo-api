@@ -9,7 +9,7 @@ RSpec.describe 'Projects API', type: :request do
 
     it 'returns projects' do
       expect(json).not_to be_empty
-      expect(json['data'].size).to eq(10)
+      expect(json['data'].size).to eq(projects.size)
     end
 
     it 'returns status code 200' do
@@ -47,7 +47,7 @@ RSpec.describe 'Projects API', type: :request do
       before { post '/api/projects', params: valid_attributes, headers: headers }
 
       it 'creates a project' do
-        expect(json['name']).to eq('Learn Elm')
+        expect(json.dig('data', 'attributes', 'name')).to eq(valid_attributes[:name])
       end
 
       it 'returns status code 201' do

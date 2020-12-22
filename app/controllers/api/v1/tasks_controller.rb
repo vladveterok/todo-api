@@ -5,12 +5,11 @@ module Api
       before_action :set_project_task, only: %i[show update destroy toggle_status]
 
       def index
-        render json: @project.tasks, status: :ok
+        @tasks = @project.tasks
+        render json: SerializeService.new(object: @tasks, serializer: :task).call, status: :ok
       end
 
-      def show
-        # render json: @task, status: :ok
-      end
+      def show; end
 
       def create
         @task = @project.tasks.build(task_params)
