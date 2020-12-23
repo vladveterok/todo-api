@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
   has_many :projects, dependent: :destroy, inverse_of: :user
 
-  validates :email, presence: true, length: { in: Constants::NAME_LENGTH }
-  validates :password_digest, presence: true, format: { with: Constants::PASSWORD_FORMAT }
+  validates :email,
+            format: { with: URI::MailTo::EMAIL_REGEXP },
+            presence: true,
+            uniqueness: { case_sensitive: false }
+  validates :password_digest, presence: true
+  validates :password, presence: true, format: { with: Constants::PASSWORD_FORMAT }
 end

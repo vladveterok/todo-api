@@ -3,6 +3,11 @@ en:
     not_authorized: Not authorizeddddd
     not_found: Cannot find email or passwrod provided, please, go away and never come back
     unauthorized: Grab your shotgun, babe, bad guys at the door
-  messages:  
+    email_taken: Email has already been taken
+    projects:
+      destroy: Unable to delete Project 
+  messages:
+    auth:
+      signup_success: You’re successfully registered!
     projects:
       destroy_success: Project deleted successfully

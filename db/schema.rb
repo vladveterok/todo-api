@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_203947) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "lower((email)::text)", name: "index_users_on_lower_email", unique: true
   end
 
   add_foreign_key "projects", "users"

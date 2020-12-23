@@ -1,10 +1,12 @@
 class SignupController < ApplicationController
   def create
     user = User.new(user_params)
+    # byebug
     return render json: { errors: user.errors.full_messages.join(' ') }, status: :unprocessable_entity unless user.save
 
-    tokens = SetupTokensService.new(user: user, response: response).call
-    render json: { csrf: tokens[:csrf] }
+    SetupTokensService.new(user: user, response: response).call
+    # render json: { csrf: tokens[:csrf] }
+    render json: { message: I18n.t('messages.auth.signup_success') }
   end
 
   private
