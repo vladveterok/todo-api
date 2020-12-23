@@ -6,6 +6,7 @@ ruby '2.7.1'
 gem 'acts_as_list', '~> 1.0.2'
 gem 'bcrypt', '~> 3.1.13'
 gem 'carrierwave', '~> 2.0'
+gem 'cloudinary', '~> 1.0'
 gem 'ffaker', '~> 2', require: false
 gem "image_processing", "~> 1.0"
 gem 'jsonapi-serializer', '~> 2.1'

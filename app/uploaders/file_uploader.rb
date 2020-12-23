@@ -1,8 +1,9 @@
 class FileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include Cloudinary::CarrierWave
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
 
   def store_dir
@@ -23,5 +24,9 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def extension_whitelist
     %w[jpg jpeg png]
+  end
+
+  CarrierWave.configure do |config|
+    config.cache_storage = :file
   end
 end

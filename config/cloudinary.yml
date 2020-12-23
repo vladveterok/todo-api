@@ -1,0 +1,12 @@
+development:
+  cloud_name: dvdc4nz1v
+  api_key: '845525658717853'
+  api_secret: f9DhDSkXeFZJ5-gdrBxwOVN8Wxw
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dvdc4nz1v
+  api_key: '845525658717853'
+  api_secret: f9DhDSkXeFZJ5-gdrBxwOVN8Wxw
+  enhance_image_tag: true
+  static_file_support: true
