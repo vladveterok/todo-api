@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   post 'signup', to: 'signup#create'
   post 'signin', to: 'signin#create'
+  delete 'signin', to: 'signin#destroy'
   post 'refresh', to: 'refresh#create'
 end

@@ -6,7 +6,6 @@ RSpec.describe 'Users signup API', type: :request do
       it 'returns http success' do
         post '/signup', params: user_params
         expect(response).to be_successful
-        # expect(json.keys).to eq ['csrf']
         expect(json.keys).to eq ['message']
         expect(response.cookies[JWTSessions.access_cookie]).to be_present
       end

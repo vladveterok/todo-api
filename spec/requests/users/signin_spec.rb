@@ -1,10 +1,10 @@
 RSpec.describe 'Users signin API', type: :request do
-  describe 'POST #create' do
-    let(:password) { '1Password' }
-    let(:email) { 'test@test.test' }
-    let(:user_signup_params) { { email: email, password: password, password_confirmation: password } }
-    let(:user_params) { { email: email, password: password } }
+  let(:password) { '1Password' }
+  let(:email) { 'test@test.test' }
+  let(:user_signup_params) { { email: email, password: password, password_confirmation: password } }
+  let(:user_params) { { email: email, password: password } }
 
+  describe 'POST #create' do
     before { post '/signup', params: user_signup_params }
 
     it 'returns http success' do
@@ -17,6 +17,28 @@ RSpec.describe 'Users signin API', type: :request do
     it 'returns unauthorized for invalid params' do
       post '/signin', params: { email: email, password: 'incorrect' }
       expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
+  describe 'logout DELETE #destroy' do
+    context 'with failure' do
+      it 'returns unauthorized http status' do
+        delete '/signin'
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'with success' do
+      let(:user) { create(:user) }
+      let(:headers) { valid_headers }
+
+      before do
+        delete '/signin', params: {}, headers: headers
+      end
+
+      it 'returns http success with valid tokens' do
+        expect(response).to be_successful
+      end
     end
   end
 end
