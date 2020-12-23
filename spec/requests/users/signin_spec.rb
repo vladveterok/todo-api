@@ -1,6 +1,6 @@
 RSpec.describe 'Users signin API', type: :request do
   describe 'POST #create' do
-    let(:password) { 'password' }
+    let(:password) { '1Password' }
     let(:email) { 'test@test.test' }
     let(:user_signup_params) { { email: email, password: password, password_confirmation: password } }
     let(:user_params) { { email: email, password: password } }
