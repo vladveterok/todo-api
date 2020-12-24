@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CommentsController < ApplicationController
+    class CommentsController < Api::V1::ApiController
       before_action :set_task
       before_action :set_task_comment, only: %i[update destroy]
 
@@ -11,6 +11,7 @@ module Api
 
       def create
         @comment = @task.comments.build(comment_params)
+        # return head :forbidden unless @task.project.user == current_user
         return render json: { error: @comment.errors }, status: :unprocessable_entity unless @comment.save
 
         render json: SerializeService.new(object: @comment, serializer: :comment).call, status: :created
@@ -34,6 +35,7 @@ module Api
 
       def set_task
         @task = Task.find(params[:task_id])
+        return head :forbidden unless @task.project.user == current_user
       end
 
       def set_task_comment

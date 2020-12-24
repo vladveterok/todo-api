@@ -8,7 +8,7 @@ gem 'bcrypt', '~> 3.1.13'
 gem 'carrierwave', '~> 2.0'
 gem 'cloudinary', '~> 1.0'
 gem 'ffaker', '~> 2', require: false
-gem "image_processing", "~> 1.0"
+gem 'image_processing', '~> 1.0'
 gem 'jsonapi-serializer', '~> 2.1'
 gem 'jwt_sessions', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'

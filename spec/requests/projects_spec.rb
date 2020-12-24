@@ -1,8 +1,8 @@
 RSpec.describe 'Projects API', type: :request do
+  include_context 'with headers'
   let(:user) { create(:user) }
   let!(:projects) { create_list(:project, 10, user_id: user.id) }
   let(:project_id) { projects.first.id }
-  let(:headers) { valid_headers }
 
   describe 'GET /projects' do
     before { get '/api/projects', params: {}, headers: headers }
@@ -15,16 +15,24 @@ RSpec.describe 'Projects API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(:ok)
     end
+
+    context 'when 401' do
+      let(:headers) { invalid_headers }
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
   end
 
   describe 'POST /projects' do
-    let(:valid_attributes) { { name: 'Learn Elm', user_id: user.id } }
+    let(:attributes) { { name: 'Learn Elm', user_id: user.id } }
+
+    before { post '/api/projects', params: attributes, headers: headers }
 
     context 'when the request is valid' do
-      before { post '/api/projects', params: valid_attributes, headers: headers }
-
       it 'creates a project' do
-        expect(json.dig('data', 'attributes', 'name')).to eq(valid_attributes[:name])
+        expect(json.dig('data', 'attributes', 'name')).to eq(attributes[:name])
       end
 
       it 'returns status code 201' do
@@ -32,32 +40,43 @@ RSpec.describe 'Projects API', type: :request do
       end
     end
 
-    context 'when the request is invalid' do
-      before { post '/api/projects', params: { name: 'Foobar', user_id: nil } }
+    context 'when 401' do
+      let(:headers) { invalid_headers }
 
-      it 'returns status code 422' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns a validation failure message' do
-        expect(response.body)
-          .to match(/"error":"Not authorizeddddd"/)
       end
     end
   end
 
   describe 'PUT /projects/:id' do
-    let(:valid_attributes) { { name: 'Shopping' } }
+    let(:attributes) { { name: 'Shopping' } }
+
+    before { put "/api/projects/#{project_id}", params: attributes, headers: headers }
 
     context 'when the record exists' do
-      before { put "/api/projects/#{project_id}", params: valid_attributes, headers: headers }
-
       it 'updates the record' do
         expect(response.body).to be_empty
       end
 
       it 'returns status code 204' do
         expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    context 'when 401' do
+      let(:headers) { invalid_headers }
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when 404' do
+      let(:project_id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -67,6 +86,22 @@ RSpec.describe 'Projects API', type: :request do
 
     it 'returns status code 204' do
       expect(response).to have_http_status(:ok)
+    end
+
+    context 'when 401' do
+      let(:headers) { invalid_headers }
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when 404' do
+      let(:project_id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(:not_found)
+      end
     end
   end
 end

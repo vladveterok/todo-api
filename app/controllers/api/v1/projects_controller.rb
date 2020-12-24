@@ -1,12 +1,12 @@
 module Api
   module V1
     class ProjectsController < Api::V1::ApiController
-      before_action :authorize_access_request!
+      # before_action :authorize_access_request!
       before_action :set_project, only: %i[update destroy]
 
       def index
-        @projects = current_user.projects.with_tasks
-        render json: SerializeService.new(object: @projects, serializer: :project, included: :tasks).call, status: :ok
+        @projects = current_user.projects
+        render json: SerializeService.new(object: @projects, serializer: :project).call, status: :ok
       end
 
       def create

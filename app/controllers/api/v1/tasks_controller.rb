@@ -1,12 +1,13 @@
 module Api
   module V1
     class TasksController < Api::V1::ApiController
+      # before_action :authorize_access_request!
       before_action :set_project
       before_action :set_project_task, only: %i[update destroy toggle_status]
 
       def index
         @tasks = @project.tasks
-        render json: SerializeService.new(object: @tasks, serializer: :task, included: :comments).call, status: :ok
+        render json: SerializeService.new(object: @tasks, serializer: :task).call, status: :ok
       end
 
       def create
@@ -48,6 +49,7 @@ module Api
 
       def set_project
         @project = Project.find(params[:project_id])
+        return head :forbidden unless @project.user == current_user
       end
 
       def set_project_task
