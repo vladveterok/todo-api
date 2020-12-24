@@ -1,7 +1,8 @@
 class SerializeService
   SERIALIZERS = {
     project: ProjectSerializer,
-    task: TaskSerializer
+    task: TaskSerializer,
+    comment: CommentSerializer
   }.freeze
 
   def initialize(object:, serializer:, included: nil)

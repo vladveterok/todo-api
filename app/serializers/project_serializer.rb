@@ -1,5 +1,5 @@
 class ProjectSerializer
   include JSONAPI::Serializer
-  attributes :id, :name, :user_id, :created_at, :updated_at
+  attributes :id, :name, :user_id
   has_many :tasks
 end

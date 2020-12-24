@@ -13,7 +13,7 @@ module Api
         @project = current_user.projects.build(project_params)
         return render json: { error: @project.errors }, status: :unprocessable_entity unless @project.save
 
-        render json: ProjectSerializer.new(@project).serializable_hash.to_json, status: :created
+        render json: SerializeService.new(object: @project, serializer: :project).call, status: :created
       end
 
       def update

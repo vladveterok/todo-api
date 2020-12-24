@@ -4,17 +4,16 @@ module Api
       before_action :set_project
       before_action :set_project_task, only: %i[update destroy toggle_status]
 
-      # remove
       def index
         @tasks = @project.tasks
-        render json: SerializeService.new(object: @tasks, serializer: :task).call, status: :ok
+        render json: SerializeService.new(object: @tasks, serializer: :task, included: :comments).call, status: :ok
       end
 
       def create
         @task = @project.tasks.build(task_params)
         return render json: { error: @task.errors }, status: :unprocessable_entity unless @task.save
 
-        render json: @project, status: :created
+        render json: SerializeService.new(object: @task, serializer: :task).call, status: :created
       end
 
       def update

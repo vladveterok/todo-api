@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: Constraints::ApiVersionConstraint.new(version: 'v1', default: true) do
       resources :projects do
         resources :tasks do
+          resources :comments
           post :toggle_status, on: :member
           collection do
             patch :sort
