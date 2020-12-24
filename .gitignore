@@ -8,6 +8,8 @@
 # Ignore bundler config.
 /.bundle
 
+/public/images
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
