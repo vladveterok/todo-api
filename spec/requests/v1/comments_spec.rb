@@ -1,10 +1,14 @@
 RSpec.describe 'Comments API', type: :request do
+  include Docs::V1::Comments::Api
+
   include_context 'with user, project, task, task_id'
   include_context 'with headers'
   let!(:comments) { create_list(:comment, 3, task_id: task.id) }
   let(:id) { comments.first.id }
 
   describe 'GET /projects/:project.id/tasks/:task_id/comments' do
+    include Docs::V1::Comments::Index
+
     before { get "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
     context 'when task exists' do
@@ -44,6 +48,8 @@ RSpec.describe 'Comments API', type: :request do
   end
 
   describe 'POST /projects/:project.id/tasks/:task_id/comments' do
+    include Docs::V1::Comments::Create
+
     let(:valid_attributes) { { text: 'Visit Narnia' } }
 
     context 'when request attributes are valid' do
@@ -87,6 +93,8 @@ RSpec.describe 'Comments API', type: :request do
   end
 
   describe 'PUT /projects/:project_id/tasks/task_id/comments/:id' do
+    include Docs::V1::Comments::Update
+
     let(:valid_attributes) { { text: 'Mozart, where are your panties?' } }
 
     before do
@@ -131,6 +139,8 @@ RSpec.describe 'Comments API', type: :request do
   end
 
   describe 'DELETE /projects/:project.id/tasks/:task_id/comments/:id' do
+    include Docs::V1::Comments::Destroy
+
     before { delete "/api/projects/#{project.id}/tasks/#{task_id}/comments/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do

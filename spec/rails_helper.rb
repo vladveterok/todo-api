@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
+require 'dox'
 require 'database_cleaner'
 require 'ffaker'
 

@@ -11,7 +11,6 @@ module Api
 
       def create
         @comment = @task.comments.build(comment_params)
-        # return head :forbidden unless @task.project.user == current_user
         return render json: { error: @comment.errors }, status: :unprocessable_entity unless @comment.save
 
         render json: SerializeService.new(object: @comment, serializer: :comment).call, status: :created

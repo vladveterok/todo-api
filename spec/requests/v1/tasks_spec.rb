@@ -1,10 +1,14 @@
 RSpec.describe 'Tasks API', type: :request do
+  include Docs::V1::Tasks::Api
+
   include_context 'with user, project, task, task_id'
   include_context 'with headers'
   let!(:tasks) { create_list(:task, 20, project_id: project.id) }
   let(:id) { tasks.first.id }
 
   describe 'GET /projects/:project_id/tasks' do
+    include Docs::V1::Tasks::Index
+
     before { get "/api/projects/#{project_id}/tasks", params: {}, headers: headers }
 
     context 'when project exists' do
@@ -44,6 +48,8 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   describe 'POST /projects/:project_id/tasks' do
+    include Docs::V1::Tasks::Create
+
     let(:attributes) { { name: 'Visit Narnia', done: false } }
 
     before { post "/api/projects/#{project_id}/tasks", params: attributes, headers: headers }
@@ -81,6 +87,8 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   describe 'PUT /projects/:project_id/tasks/:id' do
+    include Docs::V1::Tasks::Update
+
     let(:valid_attributes) { { name: 'Mozart' } }
 
     before { put "/api/projects/#{project_id}/tasks/#{id}", params: valid_attributes, headers: headers }
@@ -123,6 +131,7 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   describe 'DELETE /projects/:project_id/tasks/:id' do
+    include Docs::V1::Tasks::Destroy
     before { delete "/api/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
@@ -156,6 +165,8 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   describe 'POST /projects/:id/tasks/:id/toggle_status' do
+    include Docs::V1::Tasks::Toggle_status
+
     before do
       post "/api/projects/#{project_id}/tasks/#{id}/toggle_status", params: {}, headers: headers
     end
@@ -167,6 +178,8 @@ RSpec.describe 'Tasks API', type: :request do
   end
 
   describe 'PATCH /projects/:id/tasks/sort' do
+    include Docs::V1::Tasks::Sort
+
     before { patch "/api/projects/#{project_id}/tasks/sort", params: {}, headers: headers }
 
     it 'returns status code 200' do

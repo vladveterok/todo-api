@@ -1,11 +1,15 @@
 RSpec.describe 'Users refresh API', type: :request do
+  include Docs::Refresh::Api
+
   describe 'POST #create' do
+    include Docs::Refresh::Create
+
     let(:user) { create(:user) }
 
     context 'when refresh success' do
       let(:headers) { expired_headers }
 
-      it do
+      it 'success', :dox do
         post '/refresh', params: {}, headers: headers
 
         expect(response).to be_successful
@@ -17,7 +21,7 @@ RSpec.describe 'Users refresh API', type: :request do
     context 'when refresh with a failure' do
       let(:headers) { valid_headers }
 
-      it do
+      it 'returns status unauthorized', :dox do
         post '/refresh', params: {}, headers: headers
         expect(response).to have_http_status(:unauthorized)
       end
