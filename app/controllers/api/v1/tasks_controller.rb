@@ -1,7 +1,6 @@
 module Api
   module V1
     class TasksController < Api::V1::ApiController
-      # before_action :authorize_access_request!
       before_action :set_project
       before_action :set_project_task, only: %i[update destroy toggle_status]
 
