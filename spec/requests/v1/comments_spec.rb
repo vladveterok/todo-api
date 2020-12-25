@@ -12,11 +12,11 @@ RSpec.describe 'Comments API', type: :request do
     before { get "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
     context 'when task exists' do
-      it 'returns status code 200' do
+      it 'returns status code 200', :dox do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns all project tasks' do
+      it 'returns all project tasks', :dox do
         expect(json['data'].size).to eq(comments.size)
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe 'Comments API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 404' do
       let(:task_id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -57,7 +57,7 @@ RSpec.describe 'Comments API', type: :request do
         post "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: valid_attributes, headers: headers
       end
 
-      it 'returns status code 201' do
+      it 'returns status code 201', :dox do
         expect(response).to have_http_status(:created)
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 401' do
       before { post "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: {}, headers: invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe 'Comments API', type: :request do
 
       before { post "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe 'Comments API', type: :request do
 
       before { post "/api/projects/#{project.id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(status).to eq(404)
       end
     end
@@ -102,11 +102,11 @@ RSpec.describe 'Comments API', type: :request do
     end
 
     context 'when comment exists' do
-      it 'returns status code 204' do
+      it 'returns status code 204', :dox do
         expect(response).to have_http_status(:no_content)
       end
 
-      it 'updates the comment' do
+      it 'updates the comment', :dox do
         updated_comment = Comment.find(id)
         expect(updated_comment.text).to match(/Mozart/)
       end
@@ -115,7 +115,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -124,7 +124,7 @@ RSpec.describe 'Comments API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -132,7 +132,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 404' do
       let(:id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -143,14 +143,14 @@ RSpec.describe 'Comments API', type: :request do
 
     before { delete "/api/projects/#{project.id}/tasks/#{task_id}/comments/#{id}", params: {}, headers: headers }
 
-    it 'returns status code 204' do
+    it 'returns status code 204', :dox do
       expect(response).to have_http_status(:no_content)
     end
 
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe 'Comments API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -167,7 +167,7 @@ RSpec.describe 'Comments API', type: :request do
     context 'when 404' do
       let(:id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end

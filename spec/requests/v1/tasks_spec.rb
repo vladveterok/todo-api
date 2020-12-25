@@ -12,11 +12,11 @@ RSpec.describe 'Tasks API', type: :request do
     before { get "/api/projects/#{project_id}/tasks", params: {}, headers: headers }
 
     context 'when project exists' do
-      it 'returns status code 200' do
+      it 'returns status code 200', :dox do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns all project tasks' do
+      it 'returns all project tasks', :dox do
         expect(json['data'].size).to eq(tasks.size)
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe 'Tasks API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 404' do
       let(:project_id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe 'Tasks API', type: :request do
     before { post "/api/projects/#{project_id}/tasks", params: attributes, headers: headers }
 
     context 'when request attributes are valid' do
-      it 'returns status code 201' do
+      it 'returns status code 201', :dox do
         expect(response).to have_http_status(:created)
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe 'Tasks API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -80,7 +80,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 404' do
       let(:project_id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -94,11 +94,11 @@ RSpec.describe 'Tasks API', type: :request do
     before { put "/api/projects/#{project_id}/tasks/#{id}", params: valid_attributes, headers: headers }
 
     context 'when task exists' do
-      it 'returns status code 204' do
+      it 'returns status code 204', :dox do
         expect(response).to have_http_status(:no_content)
       end
 
-      it 'updates the task' do
+      it 'updates the task', :dox do
         updated_task = Task.find(id)
         expect(updated_task.name).to match(/Mozart/)
       end
@@ -107,7 +107,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -116,7 +116,7 @@ RSpec.describe 'Tasks API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -124,7 +124,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 404' do
       let(:id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -134,14 +134,14 @@ RSpec.describe 'Tasks API', type: :request do
     include Docs::V1::Tasks::Destroy
     before { delete "/api/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
 
-    it 'returns status code 204' do
+    it 'returns status code 204', :dox do
       expect(response).to have_http_status(:no_content)
     end
 
     context 'when 401' do
       let(:headers) { invalid_headers }
 
-      it 'returns status code 401' do
+      it 'returns status code 401', :dox do
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -150,7 +150,7 @@ RSpec.describe 'Tasks API', type: :request do
       let(:another_user) { create(:user) }
       let(:project) { create(:project, user_id: another_user.id) }
 
-      it 'returns status code 403' do
+      it 'returns status code 403', :dox do
         expect(status).to eq(403)
       end
     end
@@ -158,7 +158,7 @@ RSpec.describe 'Tasks API', type: :request do
     context 'when 404' do
       let(:id) { 0 }
 
-      it 'returns status code 404' do
+      it 'returns status code 404', :dox do
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -171,7 +171,7 @@ RSpec.describe 'Tasks API', type: :request do
       post "/api/projects/#{project_id}/tasks/#{id}/toggle_status", params: {}, headers: headers
     end
 
-    it do
+    it 'returns success', :dox do
       expect(response).to have_http_status(:ok)
       expect(Task.first.done).to be true
     end
@@ -182,7 +182,7 @@ RSpec.describe 'Tasks API', type: :request do
 
     before { patch "/api/projects/#{project_id}/tasks/sort", params: {}, headers: headers }
 
-    it 'returns status code 200' do
+    it 'returns status code 200', :dox do
       expect(response).to have_http_status(:ok)
     end
   end
