@@ -4,7 +4,7 @@ module Docs
 
     document :api do
       resource 'Signup' do
-        endpoupt '/signup'
+        endpoint '/signup'
         group 'Signup'
       end
     end

@@ -4,7 +4,7 @@ module Docs
 
     document :api do
       resource 'Refresh' do
-        endpoupt '/refresh'
+        endpoint '/refresh'
         group 'Refresh'
       end
     end
