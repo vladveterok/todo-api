@@ -2,7 +2,7 @@ en:
   activerecord:
     errors:
       messages:
-        taken: is already registered. Please, log in.
+        taken: is already taken. Please, log in.
       models:
         user:
           attributes:

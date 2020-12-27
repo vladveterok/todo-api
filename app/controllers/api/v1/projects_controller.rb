@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        @project.update(project_params)
+        @project.update!(project_params)
         head :no_content
       end
 
