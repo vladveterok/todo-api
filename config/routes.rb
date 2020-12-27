@@ -13,8 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :signin, controller: 'signin', only: %w[create destroy]
   post 'signup', to: 'signup#create'
-  post 'signin', to: 'signin#create'
-  delete 'signin', to: 'signin#destroy'
   post 'refresh', to: 'refresh#create'
 end
