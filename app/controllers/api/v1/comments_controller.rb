@@ -17,7 +17,7 @@ module Api
       end
 
       def update
-        @comment.update(comment_params)
+        @comment.update!(comment_params)
         head :no_content
       end
 

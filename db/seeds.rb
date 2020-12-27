@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'ffaker'
 
-project = Project.create(name: 'Seeded project with tasks', user_id: 1)
+project = Project.create(name: FFaker::Book.title, user_id: 1)
 
-5.times do |i|
-  Task.create(name: "Seeded task ##{i}", project_id: project.id)
+5.times do
+  Task.create(name: FFaker::Book.title, project_id: project.id)
 end

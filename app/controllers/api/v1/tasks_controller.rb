@@ -17,7 +17,7 @@ module Api
       end
 
       def update
-        @task.update(task_params)
+        @task.update!(task_params)
         head :no_content
       end
 
