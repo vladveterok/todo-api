@@ -40,7 +40,6 @@ group :development do
 end
 
 group :test do
-  gem 'database_cleaner-active_record', '~> 1.8'
   gem 'dox', require: false
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 4.0.1'

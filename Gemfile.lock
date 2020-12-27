@@ -92,10 +92,6 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
-    database_cleaner (1.8.5)
-    database_cleaner-active_record (1.8.0)
-      activerecord
-      database_cleaner (~> 1.8.0)
     database_consistency (0.8.12)
       activerecord (>= 3.2)
     diff-lcs (1.4.4)
@@ -304,7 +300,6 @@ DEPENDENCIES
   bundler-audit
   carrierwave (~> 2.0)
   cloudinary (~> 1.0)
-  database_cleaner-active_record (~> 1.8)
   database_consistency
   dox
   factory_bot_rails

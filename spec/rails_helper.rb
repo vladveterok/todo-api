@@ -2,7 +2,6 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
 require 'dox'
-require 'database_cleaner'
 require 'ffaker'
 
 SimpleCov.start 'rails' do
@@ -24,8 +23,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  # config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = true
   config.include RequestSpecHelper, type: :request
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
