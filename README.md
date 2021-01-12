@@ -1,10 +1,9 @@
 # README
 
-[![vladveterok](https://circleci.com/gh/vladveterok/todo-api.svg?style=shield)](https://circleci.com/gh/vladveterok/todo-api)
-
 Simple one-page ToDo list API to create projects, fill them with tasks, prioritize tasks, set up deadlines and statuses.
 
 ## Scope of work:
+* Setup project, bundle gems, configure test env, configure CircleCi, etc
 * Sign up / Sign in / Sign out / Refresh logic using JWT
 * Adding a Project 
 * Editing a Project 
