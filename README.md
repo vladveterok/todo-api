@@ -16,7 +16,7 @@ Simple one-page ToDo list API to create projects, fill them with tasks, prioriti
 * Deleting a Task 
 * Adding a comment to a Task 
 * Deleting a comment
-* Tests (unit and feature)
+* Tests (unit and feature). Coverage about 98%
 
 ## Documentation:
 See auto-generated documentation here: https://vladveterok.github.io/v1
