@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple one-page ToDo list API to create projects, fill them with tasks, prioritize tasks, set up deadlines and statuses.
 
-Things you may want to cover:
+## Scope of work:
+* Setup project, bundle gems, configure test env, configure CircleCi, etc
+* Sign up / Sign in / Sign out / Refresh logic using JWT
+* Adding a Project 
+* Editing a Project 
+* Deleting a Project 
+* Adding a task into a Project 
+* Setting up a Deadline 
+* Prioritization (move tasks up and down in the list of tasks inside of a project)
+* Editing a Task 
+* Changing status when the task is Done 
+* Deleting a Task 
+* Adding a comment to a Task 
+* Deleting a comment
+* Tests (unit and feature). Coverage about 98%
 
-* Ruby version
+## Documentation:
+See auto-generated documentation here: https://vladveterok.github.io/v1
 
-* System dependencies
+## Technologies:
+Please, check [Gemfile](https://github.com/vladveterok/todo-api/blob/main/Gemfile) to see the full list of technologies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Have a good day!:)
